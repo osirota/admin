@@ -9,6 +9,8 @@ import {
 import type { MenuProps } from 'antd';
 import { Layout, theme } from 'antd';
 import React, { useState } from 'react';
+import { handleAuth } from '@auth0/nextjs-auth0';
+
 import BaseLayout from './baseLayout';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -50,7 +52,12 @@ const App: React.FC = () => {
 		token: { colorBgContainer },
 	} = theme.useToken();
 
-	return <BaseLayout>Bill is a cat.</BaseLayout>;
+
+	return (
+		<BaseLayout>
+			<a href="/api/auth/login">Login</a>
+		</BaseLayout>
+	);
 };
 
 export default App;
