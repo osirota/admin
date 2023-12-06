@@ -8,7 +8,6 @@ export default function isAuth(Component: any) {
 		if (!user) {
 			return router.push('/api/auth/login');
 		}
-
 		return <Component {...props} />;
 	};
 }
