@@ -1,7 +1,9 @@
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { ConfigProvider } from 'antd';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import React from 'react';
+
 import StyledComponentsRegistry from './AntdRegistry';
 import './globals.css';
 import theme from './themeConfig';
@@ -22,7 +24,9 @@ function RootLayout({ children }: RootLayoutProps) {
 		<html lang="en">
 			<body className={inter.className}>
 				<StyledComponentsRegistry>
-					<ConfigProvider theme={theme}>{children}</ConfigProvider>
+					<UserProvider>
+						<ConfigProvider theme={theme}>{children}</ConfigProvider>
+					</UserProvider>
 				</StyledComponentsRegistry>
 			</body>
 		</html>
