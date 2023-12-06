@@ -4,13 +4,13 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 export default function isAuth(Component: any) {
 	return function IsAuth(props: any) {
-		const { user } = useUser();
+		const { user, isLoading } = useUser();
 		const router = useRouter();
 		useEffect(() => {
-			if (!user) {
+			if (!user && !isLoading) {
 				return router.push('/api/auth/login');
 			}
-		}, [router, user]);
+		}, [router, user, isLoading]);
 
 		return <Component {...props} />;
 	};
