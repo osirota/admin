@@ -49,7 +49,6 @@ const BaseLayout = ({ children }: StyledRegistryProps) => {
 		const current = items.find((nav) => nav.pathname === path);
 		setCurrent(current?.key ?? '');
 	}, [path]);
-	console.log('current', current);
 
 	return (
 		<Layout style={{ minHeight: '100vh' }}>

@@ -1,5 +1,5 @@
 'use client';
-import isAuth from '@/components/isAuth';
+import isAuth from '@/isAuth';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import React from 'react';
 import BaseLayout from './baseLayout';
