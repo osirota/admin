@@ -1,9 +1,10 @@
 'use client';
 import { LinkOutlined, MailOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Layout, Menu, Typography, theme } from 'antd';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 const { Header, Content, Footer, Sider } = Layout;
+const { Title } = Typography;
 
 interface MenuItems {
 	label: string;
@@ -14,14 +15,14 @@ interface MenuItems {
 
 const items: MenuItems[] = [
 	{
-		label: 'Home',
+		label: 'Dasboard',
 		pathname: '/',
 		key: '1',
 		icon: <MailOutlined />,
 	},
 	{
-		label: 'Users',
-		pathname: '/users',
+		label: 'Items list',
+		pathname: '/items',
 		key: '2',
 		icon: <LinkOutlined />,
 	},
@@ -31,10 +32,11 @@ interface StyledRegistryProps {
 }
 const BaseLayout = ({ children }: StyledRegistryProps) => {
 	const [collapsed, setCollapsed] = useState(false);
-	const [current, setCurrent] = useState('');
+	const [current, setCurrent] = useState<MenuItems | undefined>(items[0]);
 	const {
-		token: { colorBgContainer },
+		token: { boxShadow, colorBgContainer, padding, marginMD },
 	} = theme.useToken();
+
 	const router = useRouter();
 	const path = usePathname();
 	const handleNavigate = (navigate: any) => {
@@ -47,7 +49,7 @@ const BaseLayout = ({ children }: StyledRegistryProps) => {
 	};
 	useEffect(() => {
 		const current = items.find((nav) => nav.pathname === path);
-		setCurrent(current?.key ?? '');
+		setCurrent(current);
 	}, [path]);
 
 	return (
@@ -62,28 +64,33 @@ const BaseLayout = ({ children }: StyledRegistryProps) => {
 					mode="inline"
 					items={items}
 					onSelect={handleNavigate}
-					selectedKeys={[current]}
+					selectedKeys={[current?.key || '']}
 				/>
 			</Sider>
 			<Layout>
-				<Header style={{ padding: 0, background: colorBgContainer }} />
+				<Header
+					style={{
+						padding,
+						backgroundColor: colorBgContainer,
+						boxShadow,
+					}}
+				>
+					<Title level={4}>{current?.label}</Title>
+				</Header>
 				<Content style={{ margin: '0 16px' }}>
-					<Breadcrumb style={{ margin: '16px 0' }}>
-						<Breadcrumb.Item>User</Breadcrumb.Item>
-						<Breadcrumb.Item>Bill</Breadcrumb.Item>
-					</Breadcrumb>
 					<div
 						style={{
+							marginTop: marginMD,
 							padding: 24,
 							minHeight: 360,
-							background: colorBgContainer,
+							boxShadow,
 						}}
 					>
 						{children}
 					</div>
 				</Content>
 				<Footer style={{ textAlign: 'center' }}>
-					Ant Design ©2023 Created by Ant UED
+					Админка крутых ребят ©2023 Created by Next
 				</Footer>
 			</Layout>
 		</Layout>

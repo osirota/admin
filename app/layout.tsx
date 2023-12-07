@@ -1,12 +1,12 @@
-import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { ConfigProvider } from 'antd';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import React from 'react';
 
-import StyledComponentsRegistry from './AntdRegistry';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
+import StyledComponentsRegistry from '../libs/AntdRegistry';
+import theme from '../theme/themeConfig';
 import './globals.css';
-import theme from './themeConfig';
 
 const inter = Inter({ subsets: ['latin'] });
 
